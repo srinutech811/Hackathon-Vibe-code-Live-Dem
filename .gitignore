@@ -1,0 +1,9 @@
+# Global ignores
+*.pyc
+__pycache__/
+.env
+.DS_Store
+node_modules/
+build/
+frontend/.env
+backend/.env
