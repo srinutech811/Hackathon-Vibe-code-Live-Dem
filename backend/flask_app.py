@@ -26,14 +26,24 @@ app = Flask(__name__)
 CORS(app)
 
 def get_snowflake_conn():
-    return snowflake.connector.connect(
-        user=SNOWFLAKE_USER,
-        password=SNOWFLAKE_PASSWORD,
-        account=SNOWFLAKE_ACCOUNT,
-        database=SNOWFLAKE_DATABASE,
-        schema=SNOWFLAKE_SCHEMA,
-        warehouse=SNOWFLAKE_WAREHOUSE,
-    )
+    print(f"[DEBUG] Connecting to Snowflake with:")
+    print(f"  USER: {SNOWFLAKE_USER}")
+    print(f"  ACCOUNT: {SNOWFLAKE_ACCOUNT}")
+    print(f"  DATABASE: {SNOWFLAKE_DATABASE}")
+    print(f"  SCHEMA: {SNOWFLAKE_SCHEMA}")
+    print(f"  WAREHOUSE: {SNOWFLAKE_WAREHOUSE}")
+    try:
+        return snowflake.connector.connect(
+            user=SNOWFLAKE_USER,
+            password=SNOWFLAKE_PASSWORD,
+            account=SNOWFLAKE_ACCOUNT,
+            database=SNOWFLAKE_DATABASE,
+            schema=SNOWFLAKE_SCHEMA,
+            warehouse=SNOWFLAKE_WAREHOUSE,
+        )
+    except Exception as e:
+        print(f"[ERROR] Snowflake connection failed: {e}")
+        raise
 
 def log_audit(user, action):
     try:
@@ -162,6 +172,10 @@ def audit_logs():
         return jsonify(logs)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/')
+def serve_frontend():
+    return app.send_static_file('../frontend/index.html')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
