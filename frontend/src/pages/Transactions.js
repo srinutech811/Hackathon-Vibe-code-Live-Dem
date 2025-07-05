@@ -21,32 +21,38 @@ export default function Transactions() {
 
   return (
     <Box p={4}>
-      <Typography variant="h4" mb={2}>Transactions</Typography>
-      <Button variant="outlined" onClick={() => navigate('/dashboard')} sx={{ mb: 2 }}>Back to Dashboard</Button>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Department</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {transactions.map(txn => (
-              <TableRow key={txn.id}>
-                <TableCell>{txn.id}</TableCell>
-                <TableCell>{txn.department}</TableCell>
-                <TableCell>${txn.amount.toLocaleString()}</TableCell>
-                <TableCell>{txn.category}</TableCell>
-                <TableCell>{txn.date}</TableCell>
+      <div className="demo-brand">
+        <img src="https://img.icons8.com/color/48/000000/money-bag.png" alt="logo" height={40} />
+        Vibe FinOps
+      </div>
+      <Paper className="demo-card">
+        <Typography variant="h5" mb={2} color="primary" align="center">Transactions</Typography>
+        <Button variant="outlined" onClick={() => navigate('/dashboard')} sx={{ mb: 2 }}>Back to Dashboard</Button>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow sx={{ background: '#e3f0ff' }}>
+                <TableCell>ID</TableCell>
+                <TableCell>Department</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Category</TableCell>
+                <TableCell>Date</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {transactions.map(txn => (
+                <TableRow key={txn.id}>
+                  <TableCell>{txn.id}</TableCell>
+                  <TableCell>{txn.department}</TableCell>
+                  <TableCell style={{ color: '#1976d2', fontWeight: 500 }}>${txn.amount.toLocaleString()}</TableCell>
+                  <TableCell>{txn.category}</TableCell>
+                  <TableCell>{txn.date}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </Box>
   );
 }
