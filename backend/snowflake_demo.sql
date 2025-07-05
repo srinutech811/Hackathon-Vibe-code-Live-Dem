@@ -1,6 +1,7 @@
 -- Demo schema for Snowflake
 CREATE TABLE IF NOT EXISTS financial_summary (
     id INT AUTOINCREMENT,
+    department STRING,
     budget FLOAT,
     spent FLOAT,
     updated_at TIMESTAMP

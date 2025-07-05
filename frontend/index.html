@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIBECODE Hackathon Demo</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #f5f7fa 60%, #e3f0ff 100%); min-height: 100vh; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 2rem; color: #1976d2; margin-top: 2rem; margin-bottom: 1.5rem; }
+    .container { max-width: 800px; margin: 32px auto; padding: 2rem 2.5rem; background: #fff; box-shadow: 0 4px 24px #1976d220; border-radius: 18px; }
+    h2 { color: #1976d2; margin-bottom: 0.5rem; }
+    .summary-cards { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+    .card { flex: 1; background: #e3f0ff; border-radius: 10px; padding: 1rem 1.2rem; text-align: center; box-shadow: 0 2px 8px #1976d210; }
+    .card h3 { margin: 0; font-size: 1.1rem; color: #555; }
+    .card .value { font-size: 1.5rem; font-weight: bold; color: #1976d2; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: #fafbfc; border-radius: 10px; overflow: hidden; }
+    th, td { padding: 10px 14px; border-bottom: 1px solid #e0e0e0; text-align: left; }
+    th { background: #e3f0ff; color: #1976d2; font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    .error { color: #c62828; margin: 1rem 0; }
+    input[type="text"], input[type="password"], input[type="number"], input[type="date"], select {
+      padding: 8px 12px; border-radius: 6px; border: 1px solid #ccc; margin: 0 6px 0 0; font-size: 1rem;
+    }
+    form { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-bottom: 0.5rem; }
+    form label { flex: 1 1 180px; min-width: 140px; }
+    button { background: #1976d2; color: #fff; border: none; border-radius: 6px; padding: 8px 20px; font-size: 1rem; cursor: pointer; transition: background 0.2s; margin-left: 6px; }
+    button:hover { background: #145ea8; }
+    #login-section, #login-section {
+      margin-bottom: 2rem;
+      max-width: 380px;
+      margin: 2.5rem auto 2rem auto;
+      background: #f4f8ff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #1976d220;
+      padding: 2rem 2.2rem 1.2rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #login-section h2 {
+      color: #1976d2;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    #login-section form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 0.5rem;
+    }
+    #login-section label {
+      font-size: 1.05rem;
+      margin-bottom: 0;
+    }
+    #login-section input[type="text"],
+    #login-section input[type="password"] {
+      width: 100%;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    #login-section button {
+      margin-top: 0.5rem;
+      width: 100%;
+      padding: 10px 0;
+      font-size: 1.08rem;
+      border-radius: 6px;
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #login-section button:hover {
+      background: #145ea8;
+    }
+    #login-section .error {
+      margin: 0.6rem 0 0.2rem 0;
+      text-align: center;
+    }
+    #login-section div[style*="Need help"] {
+      margin-top: 1.2rem !important;
+      color: #1976d2 !important;
+      font-size: 0.98em !important;
+      cursor: pointer;
+      text-align: center;
+    }
+    #add-transaction-section, #audit-section { background: #f4f8ff; border-radius: 10px; padding: 1.2rem 1rem; margin-top: 2rem; box-shadow: 0 2px 8px #1976d210; }
+    #add-transaction-section h3, #audit-section h3 { margin-top: 0; }
+    #welcome { font-weight: 500; color: #1976d2; }
+    @media (max-width: 900px) {
+      .container { padding: 1.2rem; }
+      form label { min-width: 100px; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0.7rem; }
+      form { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+    <img src="https://img.icons8.com/color/96/000000/prize.png" alt="Hackathon Badge" style="margin-bottom: 1.2rem;">
+    <div class="brand" style="margin-bottom:2.2rem;">
+      <img src="https://img.icons8.com/color/48/000000/money-bag.png" height="48" alt="logo" />
+      <span style="font-weight:700; letter-spacing:1px; font-size:2.1rem;">VIBECODE Hackathon Demo</span>
+    </div>
+    <div id="login-section">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div id="login-step-1">
+          <label for="username">Username:</label>
+          <input type="text" id="username" required autocomplete="username">
+          <button type="button" id="next-btn">Next</button>
+        </div>
+        <div id="login-step-2" style="display:none;">
+          <label for="password">Password:</label>
+          <input type="password" id="password" required autocomplete="current-password">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+      <div id="login-error" class="error"></div>
+      <div style="margin-top:1rem; color:#1976d2; font-size:0.95em; cursor:pointer;" onclick="showDemoHelp()">
+        <span style="text-decoration:underline;">Need help?</span>
+      </div>
+    </div>
+
+    <div id="main-section" style="display:none;">
+      <div style="margin-bottom:1rem;">
+        <span id="welcome"></span>
+        <button onclick="logout()" style="float:right;">Logout</button>
+      </div>
+      <div id="role-hint" style="margin-bottom:1.5rem; color:#1976d2;"></div>
+
+      <h2>Financial Summary</h2>
+      <div id="summary" class="summary-cards"></div>
+      <div id="summary-error" class="error"></div>
+
+      <h2>Transactions</h2>
+      <div id="transactions"></div>
+      <div id="transactions-error" class="error"></div>
+
+      <div id="add-transaction-section" style="display:none; margin-top:2rem;">
+        <h3>Add Transaction</h3>
+        <form id="add-transaction-form">
+          <label>Department: <input type="text" id="add-dept" required></label>
+          <label>Amount: <input type="number" id="add-amt" required></label>
+          <label>Category:
+  <select id="add-cat" required style="padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc;">
+    <option value="">Select</option>
+    <option value="Travel">Travel</option>
+    <option value="Supplies">Supplies</option>
+    <option value="Payroll">Payroll</option>
+    <option value="Software">Software</option>
+    <option value="Other">Other</option>
+  </select>
+</label>
+          <label>Date: <input type="date" id="add-date" required></label>
+          <button type="submit">Add</button>
+        </form>
+        <div id="add-transaction-error" class="error"></div>
+        <div id="add-transaction-success" style="color:green;"></div>
+      </div>
+
+      <div id="audit-section" style="display:none; margin-top:2rem;">
+        <h3>Audit Logs (Admin Only)</h3>
+        <button onclick="fetchAuditLogs()">Refresh Logs</button>
+        <div id="audit-logs"></div>
+        <div id="audit-error" class="error"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showDemoHelp() {
+      alert('Demo Users:\n- employee1 / password1\n- manager1 / password2\n- admin1 / password3');
+    }
+
+    const API_BASE = 'http://localhost:5000/api';
+    let token = '';
+    let role = '';
+    let username = '';
+
+    function formatMoney(x) {
+      return '$' + (x ? Number(x).toLocaleString() : '0');
+    }
+
+    function showLogin() {
+      document.getElementById('login-section').style.display = '';
+      document.getElementById('main-section').style.display = 'none';
+    }
+    function showMain() {
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('main-section').style.display = '';
+      document.getElementById('welcome').textContent = `Welcome, ${username} (${role})`;
+      document.getElementById('role-hint').textContent =
+        role === 'admin' ? 'You have full access (Admin).' :
+        role === 'manager' ? 'You can add transactions.' :
+        'You have view-only access.';
+      document.getElementById('add-transaction-section').style.display = (role === 'manager' || role === 'admin') ? '' : 'none';
+      document.getElementById('audit-section').style.display = (role === 'admin') ? '' : 'none';
+      fetchSummary();
+      fetchTransactions();
+      if (role === 'admin') fetchAuditLogs();
+    }
+    function logout() {
+      token = '';
+      role = '';
+      username = '';
+      showLogin();
+    }
+
+    // Gmail-style login: step 1 (username), then step 2 (password)
+    document.getElementById('next-btn').onclick = function() {
+      const user = document.getElementById('username').value.trim();
+      document.getElementById('login-error').textContent = '';
+      if (!user) {
+        document.getElementById('login-error').textContent = 'Please enter your username.';
+        return;
+      }
+      document.getElementById('login-step-1').style.display = 'none';
+      document.getElementById('login-step-2').style.display = '';
+      setTimeout(() => { document.getElementById('password').focus(); }, 100);
+    };
+    document.getElementById('login-form').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('login-error').textContent = '';
+      fetch(`${API_BASE}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: document.getElementById('username').value, password: document.getElementById('password').value })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        token = data.token;
+        role = data.role;
+        username = document.getElementById('username').value;
+        showMain();
+      })
+      .catch(err => {
+        document.getElementById('login-error').textContent = err.message;
+      });
+    };
+
+
+    function fetchSummary() {
+      document.getElementById('summary-error').textContent = '';
+      fetch(`${API_BASE}/summary`, {
+        headers: { 'Authorization': 'Bearer ' + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        let html = '<table><thead><tr><th>Department</th><th>Budget</th><th>Spent</th><th>Remaining</th><th>Last Updated</th></tr></thead><tbody>';
+        data.forEach(row => {
+          html += `<tr><td>${row.department}</td><td>${formatMoney(row.budget)}</td><td>${formatMoney(row.spent)}</td><td>${formatMoney(row.remaining)}</td><td>${row.last_updated}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('summary').innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById('summary-error').textContent = 'Error loading summary: ' + err.message;
+      });
+    }
+
+    function fetchTransactions() {
+      document.getElementById('transactions-error').textContent = '';
+      fetch(`${API_BASE}/transactions`, {
+        headers: { 'Authorization': 'Bearer ' + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        let html = '<table><thead><tr><th>ID</th><th>Department</th><th>Amount</th><th>Category</th><th>Date</th></tr></thead><tbody>';
+        data.forEach(txn => {
+          html += `<tr><td>${txn.id}</td><td>${txn.department}</td><td>${formatMoney(txn.amount)}</td><td>${txn.category}</td><td>${txn.date}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('transactions').innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById('transactions-error').textContent = 'Error loading transactions: ' + err.message;
+      });
+    }
+
+    document.getElementById('add-transaction-form') && (document.getElementById('add-transaction-form').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('add-transaction-error').textContent = '';
+      document.getElementById('add-transaction-success').textContent = '';
+      fetch(`${API_BASE}/add_transaction`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({
+          department: document.getElementById('add-dept').value,
+          amount: parseFloat(document.getElementById('add-amt').value),
+          category: document.getElementById('add-cat').value,
+          date: document.getElementById('add-date').value
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        document.getElementById('add-transaction-success').textContent = 'Transaction added!';
+        fetchTransactions();
+      })
+      .catch(err => {
+        document.getElementById('add-transaction-error').textContent = err.message;
+      });
+    });
+
+    function fetchAuditLogs() {
+      document.getElementById('audit-error').textContent = '';
+      fetch(`${API_BASE}/audit_logs`, {
+        headers: { 'Authorization': 'Bearer ' + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        let html = '<table><thead><tr><th>ID</th><th>User</th><th>Action</th><th>Timestamp</th></tr></thead><tbody>';
+        data.forEach(log => {
+          html += `<tr><td>${log.id}</td><td>${log.user}</td><td>${log.action}</td><td>${log.timestamp}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('audit-logs').innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById('audit-error').textContent = 'Error loading audit logs: ' + err.message;
+      });
+    }
+
+    // On load, show login
+    showLogin();
+  </script>
+</body>
+</html>

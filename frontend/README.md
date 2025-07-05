@@ -1,21 +1,16 @@
-# Frontend (React)
+# Frontend (HTML/JS) – Simple Live Demo
 
-## Setup
-1. Install dependencies:
-   ```
-   npm install
-   ```
-2. Start the development server:
-   ```
-   npm start
-   ```
+## How to Run
+1. Start the backend Flask server (see ../backend/README.md).
+2. Open `index.html` in your browser (double-click or right-click → Open with browser).
+
+- The dashboard will show live data from your Snowflake database via the backend.
+- No build, no install, no signup needed.
 
 ## Features
-- Login page (role-based)
-- Financial dashboard (charts, tables)
-- Data explorer (search, filter)
-- Audit log view (admin)
+- Financial summary cards
+- Transactions table
+- Modern, clean UI
 
-## API Base URL
-- By default, the React app expects the backend API at `http://localhost:8000`.
-- You can change this in the `.env` file or in the API service config.
+## Note
+- If you want to demo to remote users/judges, use [ngrok](https://ngrok.com/) to expose your backend and update the API URL in the HTML file.
